@@ -20,6 +20,8 @@
     height: $base-width - 5;
     color: $black;
     padding: 0 $base-gap * 2;
+    position: sticky;
+    top: 0;
     @media only screen and (max-width: $md) {
       height: unset;
       padding: 0 $base-gap;
