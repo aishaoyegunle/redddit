@@ -13,7 +13,7 @@
         />
       </div>
       <div class="container__header-filter">
-        <p>FILTER:</p>
+        <p>FILTER BY:</p>
         <input
           type="date"
           name=""

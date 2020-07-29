@@ -175,7 +175,10 @@
           margin-top: $base-gap - 0.5;
           a {
             font-size: $base-font - 0.375;
-            color: $dark-gray;
+            color: rgb(140, 140, 134);
+          }
+          .date {
+            font-size: $base-font - 0.375;
           }
         }
         p {
