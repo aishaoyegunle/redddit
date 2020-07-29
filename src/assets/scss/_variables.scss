@@ -6,9 +6,17 @@ $base-gap: 1rem;
 // font size
 $base-font: 1rem;
 
-//
+//container size
 $base-width: 10rem;
 
 // color
 $black: #27394b;
 $white: #ffffff;
+$light-gray: rgb(240, 240, 240);
+$dark-gray: rgb(140, 140, 134);
+$text-gray: #c1c7d0;
+
+// screen size
+$xl: 1280px;
+$md: 770px;
+$xs: 375px;

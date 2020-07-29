@@ -9,39 +9,52 @@
     "footer";
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
-  background: rgb(140, 140, 134);
+  background: $dark-gray;
 
   &__header {
     grid-area: header;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f1f1f1;
+    background: $light-gray;
     height: $base-width - 5;
     color: $black;
     padding: 0 $base-gap * 2;
+    @media only screen and (max-width: $md) {
+      height: unset;
+      padding: 0 $base-gap;
+    }
+
     .search {
       flex-basis: 20%;
       & input {
         border: 0.5px solid #bdbdbd;
         border-radius: 3px;
         -webkit-appearance: textfield;
-        color: #c1c7d0 !important;
+        color: $text-gray !important;
         padding: $base-gap - 0.2;
         width: $base-width * 2.2;
         &::placeholder {
           font-style: italic;
-          color: #c1c7d0;
+          color: $text-gray;
         }
         &:-webkit-autofill {
-          color: #c1c7d0 !important;
-          -webkit-text-fill-color: #c1c7d0 !important;
+          color: $text-gray !important;
+          -webkit-text-fill-color: $text-gray !important;
         }
         &:active,
         &:focus {
           outline: none;
-          color: #c1c7d0;
+          color: $text-gray;
         }
+        @media only screen and (max-width: $md) {
+          width: $base-width;
+          padding: $base-gap - 0.7;
+        }
+      }
+      @media only screen and (max-width: $md) {
+        align-self: start;
+        margin-top: $base-gap + 0.5;
       }
     }
     &-filter {
@@ -49,17 +62,31 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @media only screen and (max-width: $xl) {
+        flex-basis: 60%;
+        flex-direction: column;
+        margin: $base-gap - 0.5;
+      }
+
       p {
         font-size: $base-font;
         font-weight: bold;
+        @media only screen and (max-width: $md) {
+          font-size: $base-font - 0.375;
+        }
       }
       .date,
       .select {
         border: 0.5px solid #bdbdbd;
         border-radius: 3px;
         -webkit-appearance: textfield;
-        color: #c1c7d0 !important;
+        color: $text-gray !important;
         padding: $base-gap - 0.2;
+        @media only screen and (max-width: $md) {
+          padding: $base-gap - 0.8;
+          width: $base-width - 3;
+          margin-bottom: $base-gap - 0.5;
+        }
       }
       .radio {
         display: flex;
@@ -99,7 +126,7 @@
 
     &-title {
       width: $base-width + 8;
-      background: rgb(240, 240, 240);
+      background: $light-gray;
       padding: $base-gap;
       border-radius: 5px;
       h3 {
@@ -107,9 +134,6 @@
         text-transform: capitalize;
         margin-bottom: $base-gap;
       }
-    }
-    @media only screen and (max-width: 600px) {
-      padding: $base-gap * 3 $base-gap;
     }
 
     .card {
@@ -141,7 +165,7 @@
           margin-top: $base-gap - 0.5;
           a {
             font-size: $base-font - 0.375;
-            color: rgb(140, 140, 134);
+            color: $dark-gray;
           }
         }
         p {

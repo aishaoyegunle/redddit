@@ -100,7 +100,7 @@ export default {
       selected: null,
       vote: "most",
       options: [
-        { name: "number of filterByUpvotes", value: null },
+        { name: "Select upvotes", value: null },
         { name: "1-1,000", value: [1, 1000] },
         { name: "1,001 - 5,000", value: [1001, 5000] },
         { name: "5,001 - 10,000", value: [5001, 10000] },
