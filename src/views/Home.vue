@@ -110,7 +110,8 @@ export default {
         { name: "25,001 - 50,000", value: [25001, 50000] },
         { name: "50,001 - 100,000", value: [50001, 100000] },
         { name: "100,000 and above", value: [100000] }
-      ]
+      ],
+      result: []
     };
   },
   mounted() {
@@ -150,28 +151,48 @@ export default {
       if (!data) {
         return this.getSubreddit();
       }
-      const result = this.allPosts.filter(el => {
+      this.result = this.allPosts.filter(el => {
         return el.data.name.toLowerCase().includes(data.toLowerCase());
       });
-      this.getSubreddit(result);
+      this.getSubreddit(this.result);
     },
     filterByDate(date) {
-      if (!date) {
+      if (!date && this.search) {
+        return this.getSubreddit(this.result);
+      }
+      if (!date && !this.search) {
         return this.getSubreddit();
       }
-      const result = this.allPosts.filter(el => {
-        return moment(el.data.created).format("YYYY-MM-DD") === date;
-      });
-      this.getSubreddit(result);
+      if (this.result.length) {
+        const result = this.result.filter(el => {
+          return moment(el.data.created).format("YYYY-MM-DD") === date;
+        });
+        this.getSubreddit(result);
+      } else {
+        const result = this.allPosts.filter(el => {
+          return moment(el.data.created).format("YYYY-MM-DD") === date;
+        });
+        this.getSubreddit(result);
+      }
     },
     filterByUpvote(data) {
-      if (!data) {
+      if (!data && this.search) {
+        return this.getSubreddit(this.result);
+      }
+      if (!data && !this.search) {
         return this.getSubreddit();
       }
-      const result = this.allPosts.filter(el => {
-        return data[0] < el.data.ups && el.data.ups < data[1];
-      });
-      this.getSubreddit(result);
+      if (this.result.length) {
+        const result = this.result.filter(el => {
+          return data[0] < el.data.ups && el.data.ups < data[1];
+        });
+        this.getSubreddit(result);
+      } else {
+        const result = this.allPosts.filter(el => {
+          return data[0] < el.data.ups && el.data.ups < data[1];
+        });
+        this.getSubreddit(result);
+      }
     }
   }
 };

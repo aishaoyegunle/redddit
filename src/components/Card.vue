@@ -5,7 +5,7 @@
       <figcaption class="card__details">
         <h5 class="card__details-title">{{ post.title }}</h5>
         <p>Name: {{ post.name }}</p>
-        <p>Upvotes: {{ post.ups }}</p>
+        <p>Upvotes: {{ formatNumber(post.ups.toString()) }}</p>
         <div class="card__details-item">
           <p>Created on: {{ moment(post.created).format("DD MMM, YYYY") }}</p>
           <a :href="post.url" target="_blank">Read more</a>
@@ -24,6 +24,9 @@ export default {
   methods: {
     moment(date) {
       return moment(date);
+    },
+    formatNumber(number) {
+      return number ? number.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0;
     }
   }
 };

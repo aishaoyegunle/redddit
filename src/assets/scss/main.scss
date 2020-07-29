@@ -22,6 +22,7 @@
     padding: 0 $base-gap * 2;
     position: sticky;
     top: 0;
+    z-index: 99;
     @media only screen and (max-width: $md) {
       height: unset;
       padding: 0 $base-gap;
@@ -184,12 +185,16 @@
     }
 
     .empty {
+      grid-column: 1/5;
       display: flex;
       justify-content: center;
       align-items: center;
       color: $white;
       font-size: $base-font + 2;
       width: 100%;
+      @media only screen and (max-width: $md) {
+        font-size: $base-font;
+      }
     }
   }
 }
