@@ -1,53 +1,81 @@
 <template>
-  <loader v-if="loading"></loader>
-  <div class="home" v-else>
-    <input
-      type="search"
-      name=""
-      id=""
-      placeholder="Search"
-      v-model="search"
-      @input="searchSubreddit(search)"
-      @keyup.13="searchSubreddit(search)"
-    />
-    <input
-      type="date"
-      name=""
-      id=""
-      v-model="date"
-      @input="filterByDate(date)"
-    />
-    <select v-model="selected" @change="filterByUpvote(selected)">
-      <option v-for="(option, i) in options" :value="option.value" :key="i">
-        {{ option.name }}
-      </option>
-    </select>
-    <input
-      type="radio"
-      id="most"
-      value="most"
-      v-model="vote"
-      @change="getSubreddit()"
-    />
-    <label for="most">most vote</label>
-    <input
-      type="radio"
-      id="least"
-      value="least"
-      v-model="vote"
-      @change="getSubreddit()"
-    />
-    <label for="least">least vote</label>
-
-    <main class="main">
-      <div v-for="(post, title, i) in subreddits" :key="i">
-        <h1>{{ title }}</h1>
-        <div v-for="(item, j) in post" :key="j">
+  <div class="container">
+    <header class="container__header">
+      <div class="search">
+        <input
+          type="search"
+          name=""
+          id=""
+          placeholder="Search"
+          v-model="search"
+          @input="searchSubreddit(search)"
+          @keyup.13="searchSubreddit(search)"
+        />
+      </div>
+      <div class="container__header-filter">
+        <p>FILTER:</p>
+        <input
+          type="date"
+          name=""
+          id=""
+          class="date"
+          v-model="date"
+          @input="filterByDate(date)"
+        />
+        <select
+          v-model="selected"
+          @change="filterByUpvote(selected)"
+          class="select"
+        >
+          <option v-for="(option, i) in options" :value="option.value" :key="i">
+            {{ option.name }}
+          </option>
+        </select>
+        <div class="radio">
+          <div class="radio--item">
+            <input
+              type="radio"
+              id="most"
+              value="most"
+              v-model="vote"
+              @change="getSubreddit()"
+            />
+            <label for="most">Most upvotes</label>
+          </div>
+          <div class="radio--item">
+            <input
+              type="radio"
+              id="least"
+              value="least"
+              v-model="vote"
+              @change="getSubreddit()"
+            />
+            <label for="least">Least upvotes</label>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container__body">
+      <div
+        v-for="(post, title, i) in subreddits"
+        :key="i"
+        class="container__body-title"
+      >
+        <h3>{{ title }}</h3>
+        <div v-for="(item, j) in post" :key="j" class="">
           <card :post="item.data"></card>
         </div>
       </div>
-      <div v-if="Object.keys(subreddits).length === 0">
-        No result found
+      <div v-if="loading" class="loader">
+        <div v-for="item in 8" :key="item" class="loader__item">
+          <loader />
+        </div>
+      </div>
+      <div
+        v-if="Object.keys(subreddits).length === 0 && !loading"
+        class="empty"
+      >
+        <h3>No result found</h3>
       </div>
     </main>
   </div>
@@ -112,7 +140,9 @@ export default {
 
         if (this.vote == "most") {
           acc[subreddit].sort((a, b) => b.data.ups - a.data.ups);
-        } else acc[subreddit].sort((a, b) => a.data.ups - b.data.ups);
+        } else {
+          acc[subreddit].sort((a, b) => a.data.ups - b.data.ups);
+        }
         return acc;
       }, {});
     },
@@ -146,3 +176,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/scss/main";
+</style>

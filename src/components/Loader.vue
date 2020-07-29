@@ -1,16 +1,6 @@
 <template>
   <div class="timeline-item">
     <div class="animated-background">
-      <div class="background-masker first-top"></div>
-      <div class="background-masker first-center"></div>
-      <div class="background-masker first-bottom"></div>
-    </div>
-    <div class="animated-background">
-      <div class="background-masker first-top"></div>
-      <div class="background-masker first-center"></div>
-      <div class="background-masker first-bottom"></div>
-    </div>
-    <div class="animated-background">
       <div class="background-masker header-top"></div>
       <div class="background-masker header-bottom"></div>
     </div>
@@ -18,19 +8,18 @@
 </template>
 
 <script>
-export default {
-  name: "Loader"
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/scss/_variables";
-
 .timeline-item {
-  margin: $base-gap - 0.5 $base-gap * 2;
+  background: rgb(180, 180, 180);
+  border-bottom: 1px solid #f2f2f2;
+  margin: 0 auto;
   position: relative;
-  height: 100vh;
-  border-radius: 5px;
+  height: 100%;
+  border-radius: 10px;
 }
 @keyframes placeHolderShimmer {
   0% {
@@ -41,53 +30,37 @@ export default {
   }
 }
 .animated-background {
-  background: red;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
   background-size: 800px 104px;
-  height: 30%;
+  height: 100%;
   position: relative;
   border-radius: 10px;
-  margin-bottom: $base-gap * 2;
 }
 .background-masker {
-  //   background: $bg-color;
+  background: #fff;
   position: absolute;
   bottom: 0;
   margin: $base-gap * 2;
   height: 100%;
-  &.first-top {
-    top: 2px;
-    left: 20px;
-    right: 0;
-    height: $base-width - 9;
-    width: 30%;
-  }
-  &.first-center {
-    top: 30px;
-    left: 20px;
-    right: 0;
-    height: $base-width - 9.2;
-    width: 40%;
-  }
-  &.first-bottom {
-    bottom: 0px;
-    left: 20px;
-    right: 0;
-    height: $base-width - 7;
-    width: 90%;
-  }
   &.header-top {
-    bottom: 25px;
+    bottom: 2px;
     left: 20px;
     right: 0;
     height: 10px;
-    width: $base-width;
+    width: $base-width - 4;
   }
   &.header-bottom {
-    bottom: 0px;
+    bottom: 18px;
     height: 16px;
     left: 20px;
     right: 0;
-    width: 80%;
+    width: $base-width;
   }
 }
 </style>

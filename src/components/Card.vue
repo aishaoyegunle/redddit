@@ -1,19 +1,17 @@
 <template>
   <div class="card">
-    <div class="card__title">
-      <h6>title: {{ post.title }}</h6>
-      <h6>name: {{ post.name }}</h6>
-      <h6>votes: {{ post.ups }}</h6>
-    </div>
-    <div class="card__body">
-      <figure>
-        <img :src="post.thumbnail" :alt="post.name" />
-        <figcaption>
-          <a :href="post.url" target="_blank">{{ post.url }}</a>
-          <p>Created {{ moment(post.created).format("DD MMM YYYY") }}</p>
-        </figcaption>
-      </figure>
-    </div>
+    <figure>
+      <img :src="post.thumbnail" :alt="post.name" class="card__img" />
+      <figcaption class="card__details">
+        <h5 class="card__details-title">{{ post.title }}</h5>
+        <p>Name: {{ post.name }}</p>
+        <p>Upvotes: {{ post.ups }}</p>
+        <div class="card__details-item">
+          <p>Created on: {{ moment(post.created).format("DD MMM, YYYY") }}</p>
+          <a :href="post.url" target="_blank">Read more</a>
+        </div>
+      </figcaption>
+    </figure>
   </div>
 </template>
 
@@ -30,3 +28,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/scss/main";
+</style>
