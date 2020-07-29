@@ -66,8 +66,10 @@
       justify-content: space-between;
       @media only screen and (max-width: $xl) {
         flex-basis: 60%;
-        flex-direction: column;
         margin: $base-gap - 0.5;
+      }
+      @media only screen and (max-width: $md) {
+        flex-direction: column;
       }
 
       p {
@@ -93,6 +95,10 @@
       .radio {
         display: flex;
         flex-direction: column;
+        margin-right: $base-gap * 2;
+        @media only screen and (max-width: $md) {
+          margin-right: 0;
+        }
         &--item {
           display: flex;
           align-items: center;
@@ -107,13 +113,13 @@
   }
 
   &__body {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     gap: $base-gap * 2;
     color: $black;
     padding: $base-gap * 2;
     min-height: 60vh;
+
     .loader {
       position: relative;
       display: flex;
@@ -175,6 +181,7 @@
         }
       }
     }
+
     .empty {
       display: flex;
       justify-content: center;
