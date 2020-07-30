@@ -16,9 +16,9 @@
       <figcaption class="card__details">
         <h5 class="card__details-title">{{ post.title }}</h5>
         <p>Name: {{ post.name }}</p>
-        <p>Upvotes: {{ formatNumber(post.ups.toString()) }}</p>
+        <p>Upvotes: {{ numberFormatter(post.ups.toString()) }}</p>
         <div class="card__details-item">
-          <p class="date">{{ moment(post.created).format("DD MMM, YYYY") }}</p>
+          <p class="date">{{ dateFormatter(post.created) }}</p>
           <a :href="post.url" target="_blank">Read more</a>
         </div>
       </figcaption>
@@ -27,16 +27,16 @@
 </template>
 
 <script>
-import moment from "moment";
+import dateFormatter from "moment";
 
 export default {
   name: "Card",
   props: ["post"],
   methods: {
-    moment(date) {
-      return moment(date);
+    dateFormatter(date) {
+      return dateFormatter(date, "X").format("LLL");
     },
-    formatNumber(number) {
+    numberFormatter(number) {
       return number ? number.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0;
     }
   }

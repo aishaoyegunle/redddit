@@ -6,7 +6,7 @@
           type="search"
           name=""
           id=""
-          placeholder="Search"
+          placeholder="Search by title"
           v-model="search"
           @input="searchSubreddit(search)"
           @keyup.13="searchSubreddit(search)"
@@ -84,7 +84,7 @@
 <script>
 import createNamespacedHelpers from "vuex";
 const { mapState } = createNamespacedHelpers;
-import moment from "moment";
+import dateFormatter from "moment";
 
 export default {
   name: "Home",
@@ -123,8 +123,8 @@ export default {
     ...mapState(["allPosts", "loading"])
   },
   methods: {
-    moment(date) {
-      return moment(date);
+    dateFormatter(date) {
+      return dateFormatter(date, "X").format("YYYY-MM-DD");
     },
     getSubreddit(data) {
       let result;
@@ -152,7 +152,7 @@ export default {
         return this.getSubreddit();
       }
       this.result = this.allPosts.filter(el => {
-        return el.data.name.toLowerCase().includes(data.toLowerCase());
+        return el.data.title.toLowerCase().includes(data.toLowerCase());
       });
       this.getSubreddit(this.result);
     },
@@ -165,12 +165,12 @@ export default {
       }
       if (this.result.length) {
         const result = this.result.filter(el => {
-          return moment(el.data.created).format("YYYY-MM-DD") === date;
+          return this.dateFormatter(el.data.created) === date;
         });
         this.getSubreddit(result);
       } else {
         const result = this.allPosts.filter(el => {
-          return moment(el.data.created).format("YYYY-MM-DD") === date;
+          return this.dateFormatter(el.data.created) === date;
         });
         this.getSubreddit(result);
       }
